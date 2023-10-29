@@ -23,12 +23,13 @@ body
     border-top-right-radius: 225px;
     box-shadow: 25px 25px 75px rgba(228, 126, 138, 0.638),
     10px 50px 70px rgba(237, 132, 144, 0.638),
-    inset 5px 5px 10px rgba(150, 40, 53, 0.638),
-    inset 5px 5px 20px rgba(166, 9, 27, 0.638),
-    inset -5px -5px 15px rgba(209, 8, 31, 0.638);
+    inset 5px 5px 10px rgba(192, 101, 111, 0.638),
+    inset 5px 5px 20px rgba(175, 83, 94, 0.638),
+    inset -5px -5px 15px rgba(165, 22, 39, 0.638);
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 .clock
 {
@@ -38,9 +39,9 @@ body
     background: #FFE5E5;
     border-radius: 50%;
     box-shadow: 10px 50px 70px rgba(222, 130, 141, 0.638),
-    inset 5px 5px 10px rgba(150, 40, 53, 0.638),
+    inset 5px 5px 10px rgba(191, 113, 123, 0.638),
     inset 5px 5px 20px rgba(166, 9, 27, 0.638),
-    inset -5px -5px 15px rgba(209, 8, 31, 0.638);
+    inset -5px -5px 15px rgba(164, 6, 24, 0.638);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,6 +56,7 @@ body
     background-color: #FFE5E5;
     border: 3px solid #cd5a5a;
     border-radius: 50%; 
+    z-index: 100000;
 }
 .clock span
 {
@@ -73,11 +75,111 @@ body
     display: inline-block;
     transform: rotate(calc(-30deg * var(--i)));
 }
-.container .circle
+.circle
 {
     position: absolute;
     width: 300px;
     height: 300px;
-    border: 2px solid rgba(222, 130, 141, 0.638);
+    border: 2px solid #dc7373;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 10;
+}
+.circle i
+{
+    position: absolute;
+    width: 6px;
+    height: 50%;
+    background: var(--cir);
+    opacity: 0.8;
+    transform-origin: bottom;
+    transform: scaleY(0.5);
+}
+.circle:nth-child(1) i
+{
+    width: 2px;
+}
+.circle:nth-child(2) i
+{
+    width: 6px;
+}
+.circle2
+{
+    width: 240px;
+    height: 240px;
+    z-index: 9;
+}
+.circle3
+{
+    width: 180px;
+    height: 180px;
+    z-index: 8;
+}
+.circle::before
+{
+    content: '';
+    position: absolute;
+    top: -8.5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--cir);
+    box-shadow: 0 0 20px var(--cir),  
+    0 0 60px var(--cir);
+}
+
+/* digital clock styles */
+
+#time
+{
+    margin-bottom: 40px;
+    display: flex;
+    padding: 10px 20px;
+    font-size: 2rem;
+    font-weight: 600;
+    border: 2px solid rgba(211, 96, 109, 0.638);
+    border-radius: 40px;
+    box-shadow: 5px 5px 10px rgba(222, 130, 141, 0.638),
+    inset 5px 5px 20px rgba(181, 100, 109, 0.638),
+    inset -5px -5px 15px rgba(161, 48, 61, 0.638)
+}
+#time div
+{
+    position: relative;
+    width: 60px;
+    text-align: center;
+    font-weight: 500;
+    color: var(--cir);
+}
+#time div:nth-child(1)::after,
+#time div:nth-child(2)::after
+{
+    content: ':';
+    position: absolute;
+    right: -4px;
+}
+#time div:last-child
+{
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #cd5a5a;
+}
+#time div:nth-child(2)::after
+{
+    animation: animate 1s steps(1) infinite;
+}
+@keyframes animate
+{
+    0%
+    {
+        opacity: 1;
+    }
+    50%
+    {
+        opacity: 0;
+    }
 }

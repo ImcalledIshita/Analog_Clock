@@ -12,10 +12,15 @@
 <body>
     <div class="container">
 
-        <div class="circle"><i></i></div>
-        <div class="circle circle2"><i></i></div>
-        <div class="circle circle3"><i></i></div>
+        <!-- Analog clock  -->
+        
         <div class="clock">
+        
+            <div class="circle" id="sc" style="--cir: #445D48"><i></i></div>
+            <div class="circle circle2" id="mn" style="--cir: #6A9C89"><i></i></div>
+            <div class="circle circle3" id="hr" style="--cir:#AEC3AE"><i></i></div>
+        
+        
             <span style="--i:1"><b>1</b></span>
             <span style="--i:2"><b>2</b></span>
             <span style="--i:3"><b>3</b></span>
@@ -29,6 +34,62 @@
             <span style="--i:11"><b>11</b></span>
             <span style="--i:12"><b>12</b></span>
         </div>
+
+        <!-- Digital clock  -->
+        
+        <div id="time">
+            <div id="hour" style="--cir:#AEC3AE">00</div>
+            <div id="minutes" style="--cir: #6A9C89">00</div>
+            <div id="seconds" style="--cir: #445D48">00</div>
+            <div id="ampm">AM</div>
+        </div>
     </div>
+
+    <script>
+        
+        let hr = document.querySelector('#hr');
+        let mn = document.querySelector('#mn');
+        let sc = document.querySelector('#sc');
+
+        setInterval(() =>{
+
+            // Analog clock 
+            
+            let day = new Date();
+            let hh = day.getHours() * 30;
+            let mm = day.getMinutes() * 6;
+            let ss = day.getSeconds() * 6;
+
+            hr.style.transform = `rotateZ(${hh + (mm / 12)}deg)`;
+            mn.style.transform = `rotateZ(${mm}deg)`;
+            sc.style.transform = `rotateZ(${ss}deg)`;
+
+            //Digital clock
+
+            let hours = document.getElementById('hour');
+            let minutes = document.getElementById('minutes');
+            let seconds = document.getElementById('seconds');
+            let ampm = document.getElementById('ampm');
+        
+            let h = new Date().getHours();
+            let m = new Date().getMinutes();
+            let s = new Date().getSeconds();
+            let am = (h >= 12) ? "PM" : "AM";
+
+            if (h > 12){
+                h = h - 12;
+            }
+
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+
+            hours.innerHTML = h;
+            minutes.innerHTML = m;
+            seconds.innerHTML = s;
+            ampm.innerHTML = am;
+        })
+
+     </script>
 </body>
 </html>
